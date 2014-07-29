@@ -1,0 +1,89 @@
+PERsonal Finance manager (perf)
+author: xsznix
+version 0.0.0
+
+usage: perf [command] [parameters]
+
+available commands:
+
+    add-account [id] [initial-balance = 0]
+        Adds an account with identifier [id].
+
+    rm-account [id] (-D or --delete)
+        Removes an account with identifier [id].
+            -D  irrevocably deletes all transactions under the account from disk.
+                Otherwise, it simply hides all transactions under the account.
+                Adding an account with the same identifier at a later time will
+                restore the hidden transactions into view.
+
+    bal (-A or --account [account id]) (-A ...)
+        Lists all account identifiers with their current balances.
+            -A  only list balances for accounts [id]
+
+    ~~~~
+
+    add [description] [category] [account id 1] [net change 1] ([account id 2]
+            [net change 2]...) (-p [property name] [property value])
+        Adds a transaction that modifies the balance of all specified accounts
+        by their respective net change values.
+            -p  sets property [name] to [value]
+
+    rm [tx id]
+        Removes the transaction with identifier [id]
+
+    ls (-A or --account [account id]) (-c or --category [category]) (-d or
+            --date [tx date]) (-r or --date-range [start date] [end date])
+            (-f or --filter [property] [text]) (-fr or --regex-filter [property]
+            [regex]) (-fd or --date-filter [property] [date]) (-fdr or
+            --date-range-filter [property] [date start] [date end])
+        Lists all transactions matching the given filtering options.
+
+    mod [tx id] [property name 1] [property value 1] ([property name 2]
+            [property value 2]...)
+        Modifies the transaction with identifier [id] to add or change
+        given properties to the given values.
+
+    ~~~~
+
+    add-category [category id] [type]
+        Adds a category with type [type], where [type] is 'c' or 'd', for credit
+        (income) or debit (expenditures).
+
+    rm-category [category id]
+        Removes the category with id [category id] and changes the category of
+
+    declare-prop [name] [type] (-d or --default [default-value = none]) (-a or
+            --apply-to-all)
+        Declares a transaction property with name [name] and type [type], where
+        [type] may be 'string', 'number', 'boolean', or 'date'. For all new
+        transactions, if the new property is not explicitly set, it is given
+        the default value [default] if given.
+            -a  existing transactions without the new property are given the
+                property set to the default value.
+
+    undeclare-prop [name]
+        Undeclares the transaction property with name [name]. Existing
+        transactions with property [name] are not modified, but the property
+        is hidden.
+
+    mod-prop [name] (-n or --name [new name]) (-t or --type [type]) (-d or
+            --default [default-value = none]) (-D)
+        Modifies the property with name [name].
+            -n  renames the property
+            -t  modifies the type of the property.
+            -d  modifies the default value, or if '' is given, removes the
+                default value.
+            -D  removes the property on all existing transactions if the value
+                set for the property on the transaction is incompatible with
+                the new property type.
+
+    ls-props
+        Lists all defined custom properties.
+
+default properties (cannot be modified or removed):
+    description (text): a short identifying description of the occasion at which
+        the transaction occurred.
+    category (text): a nested categorization
+    date (date): the date the transaction occurred.
+    balance (special): a list of the accounts whose balances the transaction
+        modified.
