@@ -8,7 +8,7 @@ exports.getMonthsInRange = function(startDate, endDate) {
 
 	var array = [];
 	var i = 0;
-	while(year != endYear || month != endMonth+1) {
+	while(year < endYear || month < endMonth+1) {
 		array[i] = year + '-' + (month + 1);
 		i++;
 		month++;
