@@ -56,9 +56,9 @@ function getDataDirLocation() {
 exports.isConfigLoaded = function isConfigLoaded() { return configLoaded; };
 
 /* Returns the specified property in the configuration file, if loaded, otherwise returns undefined. */
-exports.getConfigProp = function getConfigProp(key) {
+exports.getConfig = function getConfig() {
 	if (configLoaded)
-		return config[key];
+		return config;
 	else
 		return null;
 };
