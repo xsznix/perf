@@ -14,14 +14,7 @@ var JsonFormatter = node_cryptojs.JsonFormatter;
 
 // generate random key
 exports.generateKey = function generateKey() {
-	var rPass = crypto.randomBytes(KEY_SIZE);
-	// convert to base64
-	var rPass_base64 = rPass.toString("base64");
-
-	console.log("passcode in base 64:");
-	console.log(rPass_base64);
-
-	return rPass_base64;
+	var rPass = crypto.randomBytes(KEY_SIZE).toString('base64');
 }
 
 exports.Crypt = function Crypt(rkey) {
@@ -29,23 +22,12 @@ exports.Crypt = function Crypt(rkey) {
 
 	// encrypt message using given key and return ciphertext data
 	this.encrypt = function(ptext) {
-		// run encryption
-		var encrypted = CryptoJS.AES.encrypt(ptext, this.key, {format: JsonFormatter});
-		// retrieve ciphertext
-		var ciphertext = encrypted.toString();
-		console.log("ciphertext:");
-		console.log(ciphertext);
-		return ciphertext;
+		return CryptoJS.AES.encrypt(ptext, this.key, {format: JsonFormatter}).toString();
 	};
 
 	// decrypt message using given key and return plaintext
 	this.decrypt = function(ctext) {
 		// run decryption
-		var decrypted = CryptoJS.AES.decrypt(ctext, this.key, {format: JsonFormatter});
-		// retrieve plaintext
-		var plaintext = decrypted.toString();
-		console.log("plaintext:");
-		console.log(plaintext);
-		return plaintext;
+		return CryptoJS.AES.decrypt(ctext, this.key, {format: JsonFormatter}).toString();
 	}
 }
