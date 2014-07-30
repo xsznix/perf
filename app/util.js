@@ -1,22 +1,33 @@
 'use strict';
 
-exports.getMonthsInRange = function(startDate, endDate) {
-	var year = startDate.getUTCFullYear();
-	var month = startDate.getUTCMonth();
-	var endYear = endDate.getUTCFullYear();
-	var endMonth = endDate.getUTCMonth();
-
+// return an array of strings representing the months that include the start and end date
+exports.getMonthsInRange = function getMonthsInRange(startDate, endDate) {
 	var array = [];
 	var i = 0;
-	while(year < endYear || month < endMonth+1) {
-		array[i] = year + '-' + (month + 1);
+	var date = startDate;
+	var end = this.nextMonth(endDate);
+	while(date.getUTCFullYear() < endDate.getUTCFullYear()
+		|| date.getUTCMonth() < endDate.getUTCMonth()+1) {
+		array[i] = this.formatDate(date);
+		date = this.nextMonth(date);
 		i++;
-		month++;
-		if(month > 11) {
-			year++;
-			month = 0;
-		}
 	}
+
 	console.log(array.toString());
 	return array;
 };
+
+// returns the YYYY-MM formatted string of a date
+exports.formatDate = function formatDate(date) {
+	return date.getUTCFullYear() + "-" + (date.getUTCMonth()+1);
+}
+
+// returns the Date representing the first day of the previous month.
+exports.previousMonth = function previousMonth(date) {
+	return new Date(date.getUTCFullYear(), date.getUTCMonth()-1, 1);
+}
+
+// returns the Date representing the first day of the next month.
+exports.nextMonth = function nextMonth(date) {
+	return new Date(date.getUTCFullYear(), date.getUTCMonth()+1, 1);
+}
