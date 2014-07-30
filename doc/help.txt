@@ -1,5 +1,5 @@
 PERsonal Finance manager (perf)
-author: xsznix
+authors: xsznix & chudooder
 version 0.0.0
 
 usage: perf [command] [parameters]
@@ -15,6 +15,9 @@ available commands:
                 Otherwise, it simply hides all transactions under the account.
                 Adding an account with the same identifier at a later time will
                 restore the hidden transactions into view.
+
+    mod-account [id] (-n or --name [new id]) (-i or --initial-balance [bal])
+        Changes the properties of an existing account.
 
     bal (-A or --account [account id]) (-A ...)
         Lists all account identifiers with their current balances.
@@ -33,8 +36,8 @@ available commands:
 
     ls (-A or --account [account id]) (-c or --category [category]) (-d or
             --date [tx date]) (-r or --date-range [start date] [end date])
-            (-f or --filter [property] [text]) (-fr or --regex-filter [property]
-            [regex]) (-fd or --date-filter [property] [date]) (-fdr or
+            (-f or --filter [property] [text]) (-F or --regex-filter [property]
+            [regex]) (-t or --date-filter [property] [date]) (-R or
             --date-range-filter [property] [date start] [date end])
         Lists all transactions matching the given filtering options.
 
@@ -51,6 +54,9 @@ available commands:
 
     rm-category [category id]
         Removes the category with id [category id] and changes the category of
+
+    mod-category [category id] (-n or --name [new name]) (-t or --type [type])
+        Modifies a category.
 
     declare-prop [name] [type] (-d or --default [default-value = none]) (-a or
             --apply-to-all)
@@ -79,6 +85,20 @@ available commands:
 
     ls-props
         Lists all defined custom properties.
+
+    ~~~~
+
+    config-set [property 1] [value 1] ([property 2] [value 2]...)
+        Sets the properties to the given values in the configuration file.
+
+    config-get [property 1] ([property 2]...)
+        Displays the values of the configuration properties.
+
+    init
+        Displays a first-use guide for setting up perf.
+
+    help
+        Displays this message.
 
 default properties (cannot be modified or removed):
     description (text): a short identifying description of the occasion at which
