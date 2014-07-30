@@ -11,10 +11,10 @@ available commands:
 
     rm-account [id] (-D or --delete)
         Removes an account with identifier [id].
-            -D  irrevocably deletes all transactions under the account from disk.
-                Otherwise, it simply hides all transactions under the account.
-                Adding an account with the same identifier at a later time will
-                restore the hidden transactions into view.
+            -D  irrevocably deletes all transactions under the account from
+                disk. Otherwise, it simply hides all transactions under the
+                account. Adding an account with the same identifier at a later
+                time will restore the hidden transactions into view.
 
     mod-account [id] (-n or --name [new id]) (-i or --initial-balance [bal])
         Changes the properties of an existing account.
