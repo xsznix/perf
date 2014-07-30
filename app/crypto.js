@@ -22,7 +22,7 @@ exports.generateKey = function generateKey() {
 	console.log(rPass_base64);
 
 	return rPass_base64;
-}
+};
 
 exports.Crypt = function Crypt(rkey) {
 	this.key = rkey;
@@ -48,4 +48,4 @@ exports.Crypt = function Crypt(rkey) {
 		console.log(plaintext);
 		return plaintext;
 	}
-}
+};
