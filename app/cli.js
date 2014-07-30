@@ -28,17 +28,20 @@ exports.Dispatcher = function Dispatcher(commands) {
 		if (typeof command === 'undefined' || command === null)
 			return 'Unknown command: ' + args[0];
 
-		// read options sequentially
+		// read arguments sequentially
 		var arg, commandArgs = [], options = {}, isInOption = false, currOption, currOptionName, optionArgumentIndex;
 		for (var i = 1; i < args.length; i++) {
 			arg = args[i];
 
 			// check if the argument is an option
 			if (command.options[arg]) {
+				// option arity mismatch
 				if (isInOption && currOption.arity !== optionArgumentIndex + 1) {
 					return 'Expected ' + currOption.arity + ' arguments for `' + currOptionName +
 						'` but got ' +  (optionArgumentIndex + 1).toString() + ' instead.';
-				} else {
+				}
+				// treat the argument as an option and start parsing subsequent parameters
+				else {
 					isInOption = true;
 					currOption = command.options[arg];
 					currOptionName = arg;
