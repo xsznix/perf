@@ -4,6 +4,7 @@
 
 interface Command {
 	options: HashMay<string, Option>;
+	usage: string;
 	exec: (arguments: string[], options: Object) => void;
 }
 interface Option {
@@ -33,12 +34,16 @@ exports.Dispatcher = function Dispatcher(commands) {
 		for (var i = 1; i < args.length; i++) {
 			arg = args[i];
 
+			// check if the user is asking for help
+			if (arg === '-h' || arg === '--help') {
+				return command.usage;
+			}
 			// check if the argument is an option
-			if (command.options[arg]) {
+			else if (command.options[arg]) {
 				// option arity mismatch
 				if (isInOption && currOption.arity !== optionArgumentIndex + 1) {
 					return 'Expected ' + currOption.arity + ' arguments for `' + currOptionName +
-						'` but got ' +  (optionArgumentIndex + 1).toString() + ' instead.';
+						'` but got ' +  (optionArgumentIndex + 1).toString() + ' instead.\n' + command.usage;
 				}
 				// treat the argument as an option and start parsing subsequent parameters
 				else {
