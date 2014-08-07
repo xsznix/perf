@@ -1,2 +1,2 @@
 #1/bin/sh
-node gen/index.js
+node app/cmd.js "$@"

@@ -12,9 +12,9 @@ available commands:
     rm-account [id] (-D or --delete)
         Removes an account with identifier [id].
             -D  irrevocably deletes all transactions under the account from
-                disk. Otherwise, it simply hides all transactions under the
-                account. Adding an account with the same identifier at a later
-                time will restore the hidden transactions into view.
+                disk. If not specified, it simply hides all transactions under
+                the account. Adding an account with the same identifier at a
+                later time will restore the hidden transactions into view.
 
     mod-account [id] (-n or --name [new id]) (-i or --initial-balance [bal])
         Changes the properties of an existing account.
@@ -94,8 +94,15 @@ available commands:
     config-get [property 1] ([property 2]...)
         Displays the values of the configuration properties.
 
-    init
+    init (-d or --data-directory [data directory]) (-k or --key-file [key file])
+            (-c or --currency-symbol [currency symbol]) (-K or --key [key])
         Displays a first-use guide for setting up perf.
+            -d  saves the data directory in [data directory] instead of the
+                default directory.
+            -k  saves the encryption/decryption key in [key file]
+            -c  sets the currency symbol (for example, the $ in $1234.00).
+                Default is '$'.
+            -K  sets the encryption/decryption key manually
 
     help
         Displays this message.

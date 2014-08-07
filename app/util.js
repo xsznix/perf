@@ -31,3 +31,19 @@ exports.previousMonth = function previousMonth(date) {
 exports.nextMonth = function nextMonth(date) {
 	return new Date(date.getUTCFullYear(), date.getUTCMonth()+1, 1);
 }
+
+exports.parseCurr = function parseCurr(money) {
+	var symidx;
+	if ((symidx = money.indexOf(currencySymbol)) != -1)
+		money = money.slice(symidx + currencySymbol.length);
+	return Math.round(parseFloat(money) * 100);
+}
+
+var currencySymbol = '';
+exports.setCurrencySymbol = function setCurrencySymbol(symbol) {
+	currencySymbol = symbol;
+}
+
+exports.currToString = function currToString(money) {
+	return currencySymbol + (money / 100).toFixed(2);
+}

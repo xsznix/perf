@@ -14,7 +14,7 @@ var JsonFormatter = node_cryptojs.JsonFormatter;
 
 // generate random key
 exports.generateKey = function generateKey() {
-	var rPass = crypto.randomBytes(KEY_SIZE).toString('base64');
+	return crypto.randomBytes(KEY_SIZE).toString('base64');
 };
 
 exports.Crypt = function Crypt(rkey) {

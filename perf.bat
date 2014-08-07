@@ -1,2 +1,2 @@
 @echo off
-node gen\index.js
+node app\cmd.js %*
